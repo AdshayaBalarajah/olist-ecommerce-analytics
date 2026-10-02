@@ -1,0 +1,40 @@
+OLIST PROJECT NOTES
+
+DATA CLEANING / CHECKS
+- 9 tables loaded into PostgreSQL; orders = 99,441, no duplicate order IDs
+- 97% of orders are delivered (96,478); analysis uses delivered orders only
+- 2,965 orders have no delivery date (mostly canceled / not delivered)
+- 610 products have no category -> labelled "unknown"
+- Dates loaded as text -> converted with ::timestamp
+- 2016 data is incomplete (266 orders in total) -> trends use Jan 2017 to Aug 2018
+- Used customer_unique_id (not customer_id) to identify repeat customers
+- Monthly revenue uses payment value (includes freight); category and state
+  revenue use item price (excludes freight), so don't compare them directly
+
+KEY FINDINGS
+1. Orders grew from 750 (Jan 2017) to 7,069 (Jan 2018), about 9x; revenue
+   grew about 8.5x (R$127.5K to R$1.08M)
+2. Peak in Nov 2017: 7,289 orders and R$1.15M (Black Friday); Dec 2017 fell
+   25% to 5,513 orders
+3. Growth flattened in 2018: about 6,000-7,000 orders and R$1.0M-R$1.13M a month
+4. Average order value: R$159.86
+5. Top categories: health_beauty (R$1.23M), watches_gifts (R$1.17M),
+   bed_bath_table (R$1.02M); the top 10 are about 62% of item revenue
+6. SP = 38% of revenue; SP + RJ + MG = 63%; northern states (RR, AP, AC)
+   are under R$20K each
+7. Repeat-customer rate is only 3.00% (2,801 of 93,358 customers)
+8. 8.11% of deliveries were late (7,826 of 96,470)
+
+RECOMMENDATIONS
+1. Retention program (loyalty offers, follow-up emails): 97% buy only once
+2. Focus marketing on SP, RJ, MG; investigate why other regions are low
+3. Investigate causes of late deliveries, especially in distant states
+4. Plan stock and promotions around the November peak
+
+CV BULLET DRAFTS
+- Analysed 96K+ delivered orders (2017-2018) across 9 relational tables
+  using SQL (PostgreSQL), covering revenue trends, categories, regions
+  and delivery performance
+- Found that only 3% of customers made repeat purchases and 8% of orders
+  arrived late, and recommended a retention program and a delivery review
+- Built a Power BI dashboard of sales, customer and delivery KPIs
